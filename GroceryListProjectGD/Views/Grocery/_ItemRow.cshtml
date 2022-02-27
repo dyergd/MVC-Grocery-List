@@ -1,0 +1,16 @@
+﻿@model Item
+
+<tr id="row-@Model.Id">
+    <td>
+        @Html.DisplayFor(modelItem => Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Amount)
+    </td>
+    <td>
+        <a type="button" class="btn btn-danger , deleteAjax" tabindex="0" data-toggle="popover" 
+                data-trigger="focus" data-content="" title="Are you sure?" asp-action="DeleteItem" asp-controller="Item" asp-route-id="@Model.Id">       
+            Remove
+        </a>
+    </td>
+</tr>

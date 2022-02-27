@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GroceryListProjectGD.Models.View_Models.GroceryListListVm>
+
+@{
+    ViewData["Title"] = "Index";
+    GroceryList groceryList = new GroceryList();
+    ApplicationUser user = new ApplicationUser();
+
+}
+
+<div id="alertArea" class="alert alert-warning" role="alert" style="display:none">
+    <span id="messageArea"></span>
+    <button id="alertCloseBtn" type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createGroceryListModal">Create Grocery List</button>
+</p>
+
+<partial name="_GroceryListModal" model="groceryList" />
+
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    Owners Email
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberofItems)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tbody-grocerylist">
+            @foreach (var item in Model)
+            {
+                
+                <partial name="_GroceryRow" model="@item" />
+            }
+        </tbody>
+    </table>
+
+    @section Scripts{
+        <script src="~/js/homeIndex.js" defer></script>
+    }
+

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<GroceryListProjectGD.Models.View_Models.PermissionsUserVm>
+
+@{
+    ViewData["Title"] = "Permissions";
+    ApplicationUser user = new ApplicationUser();
+    var groceryList = (GroceryList)ViewData["Grocery"];
+    var permissionVm = new PermissionsUserVm();
+    
+}
+
+<h1>Permissions</h1>
+
+<h4>@groceryList.Name</h4>
+
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPermissonModal">Grant Permission</button>
+    <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Back Home</a>
+</p>
+
+<partial name="_PermissonModal" model="user" />
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tbody-permission">
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    <a type="button" class="btn btn-danger , deleteAjax" tabindex="0" data-toggle="popover"
+                       data-trigger="focus" data-content="" title="Are you sure?" asp-action="revokepermissions" asp-controller="Grocery">
+                        Revoke
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+<script src="~/js/permissionIndex.js" defer></script>

@@ -1,0 +1,24 @@
+﻿@model GroceryListListVm
+
+<tr id="row-@Model.Name">
+
+    <td>
+        @Html.DisplayFor(modelItem => Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.OwnerEmail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.NumberofItems)
+    </td>
+
+    <td>
+        <a href="/Grocery/GoShopping/@Model.Id" role="button" class="btn btn-info">Go Shopping</a>
+        <a href="/Grocery/Edit/@Model.Id" role="button" class="btn btn-primary">Edit</a>
+        <a role="button" class="btn btn-danger , deleteAjax" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="  " title="Are You Sure?"
+           asp-action="DeleteAjax" asp-controller="Grocery" asp-route-id="@Model.Id">Delete</a>
+        <a href="/Grocery/Permissions/@Model.Id" role="button" class="btn btn-success">Permissions</a>
+    </td>
+
+</tr>
+

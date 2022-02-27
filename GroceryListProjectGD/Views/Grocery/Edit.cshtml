@@ -1,0 +1,101 @@
+﻿@model GroceryListProjectGD.Models.Entities.GroceryList
+
+@{
+    var groceryList = (GroceryList)ViewData["Grocery"];
+    var groceryRole = (ICollection<GroceryListRole>)ViewData["GroceryRole"];
+    var user = (ApplicationUser)ViewData["User"];
+    Item itemCreation = new Item();
+
+    var owner = groceryRole.Where(o => o.GroceryListId == groceryList.Id && o.Owner == true).FirstOrDefault();
+
+
+    ViewData["Grocery"] = groceryList;
+}
+
+
+<h1>Edit Grocery List</h1>
+
+<div>
+    
+</div>
+
+
+<partial name="_ItemCreationModal" model="itemCreation" />
+
+
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Grocery List Owner: @owner.FirstName @owner.LastName</h4>
+                <form asp-action="Edit" asp-controller="Grocery">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+
+                        <input asp-for="Id" class="form-control" hidden />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        @if(owner.UserId == user.Id)
+                        {
+                            <input asp-for="Name" class="form-control" />
+                        }
+
+                        @if (owner.UserId != user.Id)
+                        {
+                            <input asp-for="Name" class="form-control" readonly />
+                        }
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+
+                        <input asp-for="NumberofItems" class="form-control" hidden />
+                        <span asp-validation-for="NumberofItems" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @if (owner.UserId == user.Id)
+                        {
+                            <input type="submit" value="Update Name" class="btn btn-primary" id="updateName" />
+                        }
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemCreationModal">
+                           Add Item
+                        </button>
+                         <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Back Home</a>
+                        </div>
+                </form>
+            </div>
+        </div>
+           
+        @if(groceryList._item.Count() == 0)
+         {
+            <p>Add an item to the grocery list to see your items below.</p>
+         }
+
+        @if (groceryList._item != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Item Name
+                        </th>
+                        <th>
+                            Item Amount
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-edit">
+                    @foreach (var item in groceryList._item)
+                    {
+                        <partial name="_ItemRow" model="item" />                        
+                     }
+                    </tbody>
+            </table>
+        }
+
+
+
+<script src="~/js/editIndex.js" defer></script>
