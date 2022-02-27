@@ -2,6 +2,8 @@
  
 This project is a fucntional grocery list tracker. This application allows the user to create a grocery list and add items to it. The user that created the grocery list can also grant other users permission to use their grocery list.
 
+The data that this site uses is stored on a local database, as a result of that if the project is ran it will not work correctly.
+
 This was the final project created for my Advanced Web Dev class my senior year.
 
 ![image](https://user-images.githubusercontent.com/70722571/155866682-70de5a1b-09e3-4683-82ca-04cf8db92461.png)
