@@ -1,6 +1,6 @@
 # MVC Grocery List
  
-This project is a fucntional grocery list tracker. This application allows the user to create a grocery list and add items to it. The user that created the grocery list can also grant other users permission to use their grocery list.
+This project is a functional grocery list tracker. This application allows the user to create a grocery list and add items to it. The user that created the grocery list can also grant other users permission to use their grocery list.
 
 The data that this site uses is stored on a local database, as a result of that if the project is ran it will not work correctly.
 
